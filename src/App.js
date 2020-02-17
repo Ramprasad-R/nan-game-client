@@ -1,11 +1,14 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
+import SignupFormContainer from "./Signup";
 
 function App() {
   return (
+    <div>
     <div className="App">
       <h1>NaN Game</h1>
+      <SignupFormContainer />
+    </div>
     </div>
   );
 }
