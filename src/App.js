@@ -1,11 +1,9 @@
 import React from "react";
 import "./App.css";
 import { BrowserRouter, Route } from "react-router-dom";
-import SignupFormContainer from "./components/Signup";
 import Home from "./components/Home";
 function App() {
   return (
-    <div>
     <div className="App">
       <h1>NaN Game Header</h1>
       <BrowserRouter>
