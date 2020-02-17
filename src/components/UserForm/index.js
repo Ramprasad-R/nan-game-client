@@ -1,7 +1,6 @@
 import React from "react";
 
 const UserForm = props => {
-  //console.log(props);
   return (
     <div>
       {props.text}
@@ -20,7 +19,7 @@ const UserForm = props => {
           name="password"
           value={props.values.password}
         />
-        <button type="submit">Submit</button>
+        <input type="submit" value="Submit" />
       </form>
     </div>
   );
