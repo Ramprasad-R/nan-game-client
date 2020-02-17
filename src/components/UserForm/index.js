@@ -1,6 +1,6 @@
 import React from "react";
 
-const Form = props => {
+const UserForm = props => {
   return (
     <div>
       {props.text}
@@ -19,10 +19,10 @@ const Form = props => {
           name="password"
           value={props.values.password}
         />
-        <input type="submit" value="Submit"/>
+        <input type="submit" value="Submit" />
       </form>
     </div>
   );
 };
 
-export default Form;
+export default UserForm;
