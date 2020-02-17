@@ -40,12 +40,7 @@ class App extends React.Component {
       }
     }
   }
-   pick = (name, id) => {
-    this.setState({
-      gameroom: name,
-      gameroomId: id
-    })
-  }
+   
   render(){
     return (
       <div className="App">
