@@ -19,12 +19,14 @@ export function signUp(email, password) {
   };
 }
 
-function loginSuccess(token) {
+function loginSuccess(email, token) {
   return {
     type: LOGIN_SUCCESS,
-    payload: { token: token }
+    payload: { 
+      email: email,
+      token: token
+    }} 
   };
-}
 
 export function login(email, password) {
   return async function(dispatch, getState) {
@@ -33,6 +35,6 @@ export function login(email, password) {
       password
     });
 
-    dispatch(loginSuccess(response.data.token));
+    dispatch(loginSuccess(response.data.email, response.data.token));
   };
 }
