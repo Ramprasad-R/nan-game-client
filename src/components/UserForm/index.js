@@ -19,7 +19,7 @@ const Form = props => {
           name="password"
           value={props.values.password}
         />
-        <input type="submit" />
+        <input type="submit" value="Submit"/>
       </form>
     </div>
   );
