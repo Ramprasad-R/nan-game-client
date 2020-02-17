@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import Form from '../Form/index'
+import React, { Component } from "react";
+import Form from "../UserForm/index";
 
 class SignupFormContainer extends Component {
   state = {
@@ -19,15 +19,15 @@ class SignupFormContainer extends Component {
   render() {
     return (
       <div>
-        <Form 
-         text={"Signup"}
-         handleSubmit={this.handleSubmit}
-         handleChange={this.handleChange}
-         values={this.state}
-         />
+        <Form
+          text={"Signup"}
+          handleSubmit={this.handleSubmit}
+          handleChange={this.handleChange}
+          values={this.state}
+        />
       </div>
-    )
+    );
   }
 }
 
-export default SignupFormContainer
+export default SignupFormContainer;
