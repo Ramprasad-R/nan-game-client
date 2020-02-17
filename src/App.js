@@ -6,43 +6,39 @@ import Home from "./components/Home";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
 import GameRoomContainer from "./components/Gamerooms";
-
+import { connect } from "react-redux";
 // const baseUrl = process.env.PORT || 4000
-
-
+import { gameRoomsFetched } from "./actions/stream";
 class App extends React.Component {
-  state = {
-    gamerooms: [],
-    gameroom: 'first'
-  }
-   stream = new EventSource('http://localhost:4000/stream')
+  // state = {
+  //   gamerooms: [],
+  //   gameroom: "first"
+  // };
+  stream = new EventSource("http://localhost:4000/stream");
   // stream = new EventSource(`${baseUrl}/stream`)
 
   componentDidMount = () => {
     this.stream.onmessage = event => {
-      const { data } = event
+      const { data } = event;
 
-      const action = JSON.parse(data)
-      console.log('action test:', action)
+      const action = JSON.parse(data);
+      console.log("action test:", action);
 
-      const { type, payload } = action
+      const { type, payload } = action;
 
-      if (type === 'ALL_GAMEROOMS') {
-        this.setState({ gamerooms: payload })
+      if (type === "ALL_GAMEROOMS") {
+        //  this.setState({ gamerooms: payload });
+        payload.map(room => this.props.gameRoomsFetched(room.name));
       }
 
-      if (type === 'ONE_GAMEROOM') {
-        const gamerooms = [
-          ...this.state.gamerooms,
-          payload
-        ]
-
-        this.setState({ gamerooms })
+      if (type === "ONE_GAMEROOM") {
+        // const gamerooms = [...this.state.gamerooms, payload];
+        // this.setState({ gamerooms });
       }
-    }
-  }
-   
-  render(){
+    };
+  };
+
+  render() {
     return (
       <div className="App">
         <h1>NaN Game Header</h1>
@@ -57,4 +53,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default connect(null, { gameRoomsFetched })(App);
