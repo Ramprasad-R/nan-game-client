@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import UserForm from "../UserForm";
+import { useDispatch } from "react-redux";
+import { login } from "../../actions/users";
 function Login() {
+  const dispatch = useDispatch();
   const [userLoginData, setUserLoginData] = useState({
     email: "",
     password: ""
@@ -11,7 +14,15 @@ function Login() {
   };
   const handleSubmit = event => {
     event.preventDefault();
-    console.log("Form Submitted");
+    console.log(
+      "User login data",
+      userLoginData.email,
+      "pass",
+      userLoginData.password
+    );
+
+    dispatch(login(userLoginData.email, userLoginData.password));
+    setUserLoginData({ email: "", password: "" });
   };
   return (
     <div>

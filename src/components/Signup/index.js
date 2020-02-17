@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import Form from "../UserForm/index";
+import UserForm from "../UserForm/index";
 import { connect } from "react-redux";
 import { signUp } from "../../actions/users";
-
 
 class SignupFormContainer extends Component {
   state = {
@@ -23,8 +22,8 @@ class SignupFormContainer extends Component {
   render() {
     return (
       <div>
-      {this.props.userCreated ? <h1>Account created</h1> : null}
-        <Form
+        {this.props.userCreated ? <h1>Account created</h1> : null}
+        <UserForm
           text={"Signup"}
           handleSubmit={this.handleSubmit}
           handleChange={this.handleChange}
