@@ -18,7 +18,7 @@ class App extends React.Component {
   // stream = new EventSource(`${baseUrl}/stream`)
 
   componentDidMount = () => {
-    this.stream.onuser = event => {
+    this.stream.onmessage = event => {
       const { data } = event
 
       const action = JSON.parse(data)
