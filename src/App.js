@@ -50,14 +50,14 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <h1>NaN Game Header</h1>
+        <h1 style={{color:"lightblue"}}><span role='img' aria-label="">⏱️</span>NaN<span role='img' aria-label="">⏱️</span></h1>
         <BrowserRouter>
           <Route exact path="/" component={Home} />
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/gamerooms" component={Gamerooms} />
         </BrowserRouter>
-        <h1>NaN Game Footer</h1>
+        <h1><span role='img' aria-label="">🌀</span></h1>
       </div>
     );
   }
