@@ -28,13 +28,21 @@ class App extends React.Component {
 
       if (type === "ALL_GAMEROOMS") {
         //  this.setState({ gamerooms: payload });
-        payload.map(room => this.props.gameRoomsFetched(room.name));
+        payload.map(room =>
+          this.props.gameRoomsFetched({
+            gameRoomName: room.name,
+            gameRoomId: room.id
+          })
+        );
       }
 
       if (type === "ONE_GAMEROOM") {
         // const gamerooms = [...this.state.gamerooms, payload];
         // this.setState({ gamerooms });
-        this.props.gameRoomFetched(payload.name)
+        this.props.gameRoomFetched({
+          gameRoomName: payload.name,
+          gameRoomId: payload.id
+        });
       }
     };
   };
