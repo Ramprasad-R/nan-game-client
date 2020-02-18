@@ -5,7 +5,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 import Home from "./components/Home";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
-import GameRoomContainer from "./components/Gamerooms";
+import Gamerooms from "./components/Gamerooms";
 import { connect } from "react-redux";
 // const baseUrl = process.env.PORT || 4000
 import { gameRoomsFetched, gameRoomFetched } from "./actions/stream";
@@ -55,8 +55,8 @@ class App extends React.Component {
           <Route exact path="/" component={Home} />
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/login" component={Login} />
+          <Route exact path="/gamerooms" component={Gamerooms} />
         </BrowserRouter>
-        <GameRoomContainer />
         <h1>NaN Game Footer</h1>
       </div>
     );

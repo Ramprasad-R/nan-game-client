@@ -1,27 +1,38 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 // import { Link } from 'react-router-dom'
-import { connect } from 'react-redux'
+import { connect } from "react-redux";
+import GameRoom from "./GameRoom";
 
 class GameRoomContainer extends Component {
-  
-  
+  componentDidMount = () => {
+    const isLoggedIn = this.props.user.token;
+    if (!isLoggedIn) {
+      this.props.history.push("/login");
+    }
+  };
+  renderGamerooms = (rooms, RoomComponent) => {
+    return rooms.map(room => (
+      <RoomComponent key={room.gameRoomId} name={room.gameRoomName} />
+    ));
+  };
+
   render() {
-      return this.props.rooms
-      ? this.props.rooms.map((room, id) => (
-        <ul key={id}>
-          <li>{room.name}</li>
-          <button>Join!</button>
-        </ul>
-      ))
-      : "Loading..."
-}
+    if (this.props.user.token === null) {
+      return (
+        <div>
+          <p>Loading...</p>
+        </div>
+      )   
+    }  
+    return <div>{this.renderGamerooms(this.props.rooms, GameRoom)}</div>;
+  }
 }
 
 const mapStateToProps = state => {
-  console.log("state of GR", state.user.user)
+  console.log("state of GR", state);
   return {
     rooms: state.gameRoom,
     user: state.user.user
-  }
-}
-export default connect(mapStateToProps)(GameRoomContainer)
+  };
+};
+export default connect(mapStateToProps)(GameRoomContainer);

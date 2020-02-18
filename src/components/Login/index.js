@@ -5,7 +5,7 @@ import { login } from "../../actions/users";
 import { Link } from "react-router-dom";
 
 
-function Login() {
+function Login(props) {
   const dispatch = useDispatch();
   const [userLoginData, setUserLoginData] = useState({
     email: "",
@@ -25,6 +25,7 @@ function Login() {
     );
 
     dispatch(login(userLoginData.email, userLoginData.password));
+    props.history.push("/gamerooms")
     setUserLoginData({ email: "", password: "" });
   };
   return (
