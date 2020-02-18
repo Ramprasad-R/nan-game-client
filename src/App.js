@@ -8,7 +8,7 @@ import Login from "./components/Login";
 import GameRoomContainer from "./components/Gamerooms";
 import { connect } from "react-redux";
 // const baseUrl = process.env.PORT || 4000
-import { gameRoomsFetched } from "./actions/stream";
+import { gameRoomsFetched, gameRoomFetched } from "./actions/stream";
 class App extends React.Component {
   // state = {
   //   gamerooms: [],
@@ -34,6 +34,7 @@ class App extends React.Component {
       if (type === "ONE_GAMEROOM") {
         // const gamerooms = [...this.state.gamerooms, payload];
         // this.setState({ gamerooms });
+        this.props.gameRoomFetched(payload.name)
       }
     };
   };
@@ -53,4 +54,4 @@ class App extends React.Component {
   }
 }
 
-export default connect(null, { gameRoomsFetched })(App);
+export default connect(null, { gameRoomsFetched, gameRoomFetched })(App);
