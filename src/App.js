@@ -22,7 +22,7 @@ class App extends React.Component {
       const { data } = event;
 
       const action = JSON.parse(data);
-      console.log("action test:", action);
+      // console.log("action test:", action);
 
       const { type, payload } = action;
 
@@ -48,6 +48,7 @@ class App extends React.Component {
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/login" component={Login} />
         </BrowserRouter>
+        <GameRoomContainer />
         <h1>NaN Game Footer</h1>
       </div>
     );

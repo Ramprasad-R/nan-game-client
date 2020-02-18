@@ -1,27 +1,27 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 class GameRoomContainer extends Component {
-  state = {
-    gamerooms: [{
-      id: 1,
-      name: "gameRoom1"
-    },
-    {
-      id: 2,
-      name: "gameRoom2"
-    }
-  ]}
-
+  
+  
   render() {
-    return this.state.gamerooms 
-    ? this.state.gamerooms.map((room, id) => (
-      <ul key={id}>
-        <li>{room.name}</li>
-        <Link to={`/gamerooms/${room.id}`}><button>Join!</button></Link>
-      </ul>
-    ))
-    : "Loading..."
+      return this.props.rooms
+      ? this.props.rooms.map((room, id) => (
+        <ul key={id}>
+          <li>{room.name}</li>
+          <button>Join!</button>
+        </ul>
+      ))
+      : "Loading..."
+}
+}
+
+const mapStateToProps = state => {
+  console.log("state of GR", state.user.user)
+  return {
+    rooms: state.gameRoom,
+    user: state.user.user
   }
 }
-export default GameRoomContainer
+export default connect(mapStateToProps)(GameRoomContainer)
