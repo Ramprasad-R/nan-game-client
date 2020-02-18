@@ -17,7 +17,7 @@ class GameRoomContainer extends Component {
   };
 
   render() {
-    if (this.props.user.token === null) {
+    if (!this.props.rooms.length) {
       return (
         <div>
           <p>Loading...</p>
