@@ -20,10 +20,10 @@ export const GAMEROOM_CREATE_SUCCESS = 'GAMEROOM_CREATE_SUCCESS'
 //   gameRoom
 // })
 
-const gameRoomCreateSuccess = gameRoom => ({
-  type: GAMEROOM_CREATE_SUCCESS,
-  gameRoom
-})
+// const gameRoomCreateSuccess = gameRoom => ({
+//   type: GAMEROOM_CREATE_SUCCESS,
+//   gameRoom
+// })
 
 // const gameRoomDeleteSuccess = gameRoom => ({
 //   type: GAMEROOM_DELETE_SUCCESS,
@@ -68,15 +68,20 @@ const gameRoomCreateSuccess = gameRoom => ({
 //     .catch(console.error)
 // }
 
-export const createGameRoom = (data) => dispatch => {
-  request
-    .post(`${baseUrl}/gamerooms`)
-    .send(data)
-    .then(response => {
-      dispatch(gameRoomCreateSuccess(response.body))
-    })
-    .catch(console.error)
-}
+export const createGameRoom = (gameRoomInformation) => async dispatch => {
+  console.log(`dispatched createGameRoom`, gameRoomInformation)
+  try {
+    const response = await request({
+      method: "POST",
+      url: `${baseUrl}/stream`,
+      headers: { authorization: `Bearer ${gameRoomInformation["userToken"]}` },
+      data: gameRoomInformation
+    });
+    console.log("Success in create room", response);
+  } catch (error) {
+    console.log("Error response to create room", error);
+  }
+};
 
 // export const updateGameRoom = (id, data) => dispatch => {
 //   request

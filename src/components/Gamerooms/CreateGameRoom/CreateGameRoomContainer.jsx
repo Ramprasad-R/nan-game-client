@@ -23,7 +23,7 @@ class CreateGameRoomFormContainer extends React.Component {
     })
     
     this.props.createGameRoom(this.state)
-    this.props.history.push('/')
+    // this.props.history.push('/gamerooms')
   }
 
   render() {

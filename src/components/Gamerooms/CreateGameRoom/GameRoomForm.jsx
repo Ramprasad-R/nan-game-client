@@ -3,7 +3,7 @@ import React from 'react'
 export default (props) => (
     <form onSubmit={props.onSubmit}>
 
-        <label>Create a new Game room: </label>
+        <label style={{color:"green"}}>Create a new Game room: </label>
         <input 
             name="name" 
             type="text" 
