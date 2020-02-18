@@ -22,19 +22,20 @@ export function signUp(email, password) {
 function loginSuccess(email, token) {
   return {
     type: LOGIN_SUCCESS,
-    payload: { 
+    payload: {
       email: email,
       token: token
-    }} 
+    }
   };
+}
 
-export function login(email, password) {
+export function login(email, password, history) {
   return async function(dispatch, getState) {
     const response = await axios.post("http://localhost:4000/login", {
       email,
       password
     });
-
     dispatch(loginSuccess(response.data.email, response.data.token));
+    history.push("/gamerooms");
   };
 }
