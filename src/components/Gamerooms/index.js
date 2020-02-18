@@ -3,6 +3,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import GameRoom from "./GameRoom";
 import { updateGameRoom } from "../../actions/gameRooms";
+import { Link } from "react-router-dom";
+
+
 class GameRoomContainer extends Component {
   componentDidMount = () => {
     const isLoggedIn = this.props.user.token;
@@ -41,7 +44,10 @@ class GameRoomContainer extends Component {
         </div>
       );
     }
-    return <div>{this.renderGamerooms(this.props.rooms, GameRoom)}</div>;
+    return <div>
+            <Link to="/"><p>Back to Home</p></Link>
+            <div>{this.renderGamerooms(this.props.rooms, GameRoom)}</div>
+          </div>;
   }
 }
 
