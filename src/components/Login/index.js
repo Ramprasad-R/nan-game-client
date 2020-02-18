@@ -35,7 +35,7 @@ function Login(props) {
         handleChange={handleChange}
         values={userLoginData}
       />
-      <Link to="/">
+      <Link to="/" style={{color:"pink"}}>
         <p>Back to Home</p>
       </Link>
     </div>

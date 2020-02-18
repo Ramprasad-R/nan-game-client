@@ -47,7 +47,7 @@ class GameRoomContainer extends Component {
       );
     }
     return <div>
-            <Link to="/"><p>Back to Home</p></Link>
+            <Link to="/" style={{color:"pink"}}><p>Back to Home</p></Link>
             <CreateGameRoomContainer/>
             <div>{this.renderGamerooms(this.props.rooms, GameRoom)}</div>
           </div>;

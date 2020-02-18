@@ -30,7 +30,7 @@ class SignupFormContainer extends Component {
           handleChange={this.handleChange}
           values={this.state}
         />
-        <Link to="/"><p>Back to Home</p></Link>
+        <Link to="/" style={{color:"pink"}}><p>Back to Home</p></Link>
       </div>
     );
   }
