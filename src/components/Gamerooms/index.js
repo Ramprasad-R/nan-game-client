@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import GameRoom from "./GameRoom";
 import { updateGameRoom } from "../../actions/gameRooms";
 import { Link } from "react-router-dom";
+import CreateGameRoomContainer from "./CreateGameRoom/CreateGameRoomContainer";
+
 
 
 class GameRoomContainer extends Component {
@@ -46,6 +48,7 @@ class GameRoomContainer extends Component {
     }
     return <div>
             <Link to="/"><p>Back to Home</p></Link>
+            <CreateGameRoomContainer/>
             <div>{this.renderGamerooms(this.props.rooms, GameRoom)}</div>
           </div>;
   }

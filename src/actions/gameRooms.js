@@ -3,7 +3,7 @@ const baseUrl = "http://localhost:4000";
 
 // export const GAMEROOMS_FETCHED = 'GAMEROOMS_FETCHED'
 // export const GAMEROOM_FETCHED = 'GAMEROOM_FETCHED'
-// export const GAMEROOM_CREATE_SUCCESS = 'GAMEROOM_CREATE_SUCCESS'
+export const GAMEROOM_CREATE_SUCCESS = 'GAMEROOM_CREATE_SUCCESS'
 // export const GAMEROOM_DELETE_SUCCESS = 'GAMEROOM_DELETE_SUCCESS'
 // export const GAMEROOM_UPDATE_SUCCESS = 'GAMEROOM_UPDATE_SUCCESS'
 
@@ -20,10 +20,10 @@ const baseUrl = "http://localhost:4000";
 //   gameRoom
 // })
 
-// const gameRoomCreateSuccess = gameRoom => ({
-//   type: GAMEROOM_CREATE_SUCCESS,
-//   gameRoom
-// })
+const gameRoomCreateSuccess = gameRoom => ({
+  type: GAMEROOM_CREATE_SUCCESS,
+  gameRoom
+})
 
 // const gameRoomDeleteSuccess = gameRoom => ({
 //   type: GAMEROOM_DELETE_SUCCESS,
@@ -68,15 +68,15 @@ const baseUrl = "http://localhost:4000";
 //     .catch(console.error)
 // }
 
-// export const createGameRoom = (data) => dispatch => {
-//   request
-//     .post(`${baseUrl}/gamerooms`)
-//     .send(data)
-//     .then(response => {
-//       dispatch(gameRoomCreateSuccess(response.body))
-//     })
-//     .catch(console.error)
-// }
+export const createGameRoom = (data) => dispatch => {
+  request
+    .post(`${baseUrl}/gamerooms`)
+    .send(data)
+    .then(response => {
+      dispatch(gameRoomCreateSuccess(response.body))
+    })
+    .catch(console.error)
+}
 
 // export const updateGameRoom = (id, data) => dispatch => {
 //   request
@@ -107,7 +107,7 @@ const baseUrl = "http://localhost:4000";
 export const updateGameRoom = (
   gameRoomInformation,
   history
-) => async dispath => {
+) => async dispatch => {
   console.log("Dispatched updateGameRoom", gameRoomInformation);
   try {
     const response = await request({
