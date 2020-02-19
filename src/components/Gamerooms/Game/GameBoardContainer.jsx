@@ -4,14 +4,14 @@ import Card from "./Card/Card";
 import GuessCount from "./GuessCount/GuessCount";
 import { connect } from "react-redux";
 import { gameRoomPlayerScore } from "../../../actions/gameRooms";
-
+import { Link } from "react-router-dom";
 import "./GameBoardContainer.css";
+import ScoreBoard from "../../ScoreBoard";
 // import HallOfFame, { FAKE_HOF } from './components/halloffame/HallOfFame'
 
 const SIDE = 2;
 const SYMBOLS = "🎃🎂🎅🐰🎥🍂👨💪🎓👩🎊🏊👑☪🌱☘☀🏈💘⚽";
 const VISUAL_PAUSE_MSECS = 750;
-
 class GameBoard extends Component {
   state = {
     cards: this.generateCards(),
@@ -20,6 +20,7 @@ class GameBoard extends Component {
     matchedCardIndices: []
   };
 
+  currentGameRoomId = this.props.location.pathname.split("/").pop();
   // componentDidMount(){
   //   console.log(`logging the pathname:`,this.props.history.location.pathname)
   //   this.props.gameRoomPlayerScore({
@@ -107,10 +108,14 @@ class GameBoard extends Component {
         {boardCompleted &&
           this.props.gameRoomPlayerScore({
             score: guesses,
-            gameroomId: this.props.location.pathname.split("/").pop(),
+            gameroomId: this.currentGameRoomId,
             userId: this.props.user.id
           })}
         {/* {won} */}
+        <ScoreBoard gameroomId={this.currentGameRoomId} />
+        <Link to="/gamerooms" style={{ color: "pink" }}>
+          <p>Back to Gameroom</p>
+        </Link>
       </div>
     );
   }
