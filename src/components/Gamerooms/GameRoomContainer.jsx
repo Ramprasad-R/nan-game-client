@@ -20,9 +20,9 @@ class GameRoomContainer extends Component {
     console.log("user token", this.props.user.token);
     const gameRoomInformation = {
       userToken: this.props.user.token,
-      gameRoomId: e.target.id
+      gameRoomId: e.target.id,
     };
-    this.props.updateGameRoom(gameRoomInformation);
+    this.props.updateGameRoom(gameRoomInformation, this.props.history);
   };
   renderGamerooms = (rooms, RoomComponent) => {
     return rooms.map(room => {

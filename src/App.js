@@ -54,15 +54,15 @@ class App extends React.Component {
     return (
       <div className="App">
         <h1 style={{color:"lightblue"}}><span role='img' aria-label="">⏱️</span>NaN<span role='img' aria-label="">⏱️</span></h1>
-        {/* <BrowserRouter> */}
-          <Switch>
+        <BrowserRouter>
+          {/* <Switch> */}
             <Route exact path="/" component={Home} />
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/gamerooms" component={Gamerooms} />
             <Route exact path="/gamerooms/:id"component={GameBoard}/>
-          </Switch>
-        {/* </BrowserRouter> */}
+          {/* </Switch> */}
+        </BrowserRouter>
         <h1><span role='img' aria-label="">🌀</span></h1>
       </div>
     );
