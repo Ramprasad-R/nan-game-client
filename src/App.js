@@ -9,6 +9,7 @@ import Gamerooms from "./components/Gamerooms/GameRoomContainer";
 import { connect } from "react-redux";
 // const baseUrl = process.env.PORT || 4000
 import { gameRoomsFetched, gameRoomFetched } from "./actions/stream";
+import { allScoreFetched, oneScoreFetched } from "./actions/scoreBoardStream";
 import GameBoard from "./components/Gamerooms/Game/GameBoardContainer";
 
 class App extends React.Component {
@@ -18,7 +19,7 @@ class App extends React.Component {
   // };
   stream = new EventSource("http://localhost:4000/stream");
   // stream = new EventSource(`${baseUrl}/stream`)
-
+  scoreBoardStream = new EventSource("http://localhost:4000/scoreboard");
   componentDidMount = () => {
     this.stream.onmessage = event => {
       const { data } = event;
@@ -41,9 +42,33 @@ class App extends React.Component {
       if (type === "ONE_GAMEROOM") {
         // const gamerooms = [...this.state.gamerooms, payload];
         // this.setState({ gamerooms });
+        console.log("ONE_GAMEROOM", payload);
+
         this.props.gameRoomFetched({
           gameRoomName: payload.name,
           gameRoomId: payload.id
+        });
+      }
+    };
+    this.scoreBoardStream.onmessage = event => {
+      const { data } = event;
+      const action = JSON.parse(data);
+      const { type, payload } = action;
+      if (type === "ALL_SCOREINFO") {
+        payload.map(score =>
+          this.props.allScoreFetched({
+            user: score.user.email,
+            score: score.score,
+            gameroomId: score.gameroomId
+          })
+        );
+      }
+
+      if (type === "ONE_SCORE") {
+        this.props.oneScoreFetched({
+          user: payload.user.email,
+          score: payload.score,
+          gameroomId: payload.gameroomId
         });
       }
     };
@@ -101,6 +126,9 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { gameRoomsFetched, gameRoomFetched })(
-  App
-);
+export default connect(mapStateToProps, {
+  gameRoomsFetched,
+  gameRoomFetched,
+  allScoreFetched,
+  oneScoreFetched
+})(App);
