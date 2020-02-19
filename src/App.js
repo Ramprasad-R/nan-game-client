@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import { BrowserRouter,Route, Switch } from "react-router-dom";
+import { BrowserRouter,Route } from "react-router-dom";
 // import axios from 'axios'
 import Home from "./components/Home";
 import Signup from "./components/Signup";

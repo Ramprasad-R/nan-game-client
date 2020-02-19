@@ -18,11 +18,11 @@ class CreateGameRoomFormContainer extends React.Component {
 
   onSubmit = (event) => {
     event.preventDefault()
+    this.props.createGameRoom(this.state)
     this.setState({
       name: '',
     })
-    
-    this.props.createGameRoom(this.state)
+    // this.props.createGameRoom(this.state)
     // this.props.history.push('/gamerooms')
   }
 
@@ -32,7 +32,7 @@ class CreateGameRoomFormContainer extends React.Component {
     <GameRoomForm
       onSubmit={this.onSubmit}
       onChange={this.onChange}
-      values={this.state}
+      name={this.state.name}
     />
     {/* <button><Link to={'/'}>Back to the list</Link></button> */}
     </div>
