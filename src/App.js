@@ -1,14 +1,17 @@
 import React from "react";
 import "./App.css";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter,Route, Switch } from "react-router-dom";
 // import axios from 'axios'
 import Home from "./components/Home";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
-import Gamerooms from "./components/Gamerooms";
+import Gamerooms from "./components/Gamerooms/GameRoomContainer";
 import { connect } from "react-redux";
 // const baseUrl = process.env.PORT || 4000
 import { gameRoomsFetched, gameRoomFetched } from "./actions/stream";
+import GameBoard from "./components/Gamerooms/Game/GameBoardContainer";
+
+
 class App extends React.Component {
   // state = {
   //   gamerooms: [],
@@ -51,12 +54,15 @@ class App extends React.Component {
     return (
       <div className="App">
         <h1 style={{color:"lightblue"}}><span role='img' aria-label="">⏱️</span>NaN<span role='img' aria-label="">⏱️</span></h1>
-        <BrowserRouter>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/signup" component={Signup} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/gamerooms" component={Gamerooms} />
-        </BrowserRouter>
+        {/* <BrowserRouter> */}
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/signup" component={Signup} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/gamerooms" component={Gamerooms} />
+            <Route exact path="/gamerooms/:id"component={GameBoard}/>
+          </Switch>
+        {/* </BrowserRouter> */}
         <h1><span role='img' aria-label="">🌀</span></h1>
       </div>
     );

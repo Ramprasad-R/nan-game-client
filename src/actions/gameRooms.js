@@ -1,4 +1,5 @@
 import request from "axios";
+
 const baseUrl = "http://localhost:4000";
 
 // export const GAMEROOMS_FETCHED = 'GAMEROOMS_FETCHED'
@@ -122,6 +123,8 @@ export const updateGameRoom = (
       data: gameRoomInformation
     });
     console.log("Success in Join", response);
+    console.log(`gameRoomId needed for sending user to the correct room: `,gameRoomInformation.gameRoomId);
+    history.push(`/gamerooms/${gameRoomInformation.gameRoomId}`);
   } catch (error) {
     console.log("Error response to join game room", error);
   }
