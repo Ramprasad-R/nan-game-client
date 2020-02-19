@@ -2,8 +2,7 @@ import request from "axios";
 
 const baseUrl = "http://localhost:4000";
 
-// export const GAMEROOMS_FETCHED = 'GAMEROOMS_FETCHED'
-// export const GAMEROOM_FETCHED = 'GAMEROOM_FETCHED'
+
 export const GAMEROOM_CREATE_SUCCESS = 'GAMEROOM_CREATE_SUCCESS'
 // export const GAMEROOM_DELETE_SUCCESS = 'GAMEROOM_DELETE_SUCCESS'
 // export const GAMEROOM_UPDATE_SUCCESS = 'GAMEROOM_UPDATE_SUCCESS'
@@ -11,15 +10,6 @@ export const GAMEROOM_CREATE_SUCCESS = 'GAMEROOM_CREATE_SUCCESS'
 // // const url = process.env.DATABASE_URL || 'https://damp-beach-23036.herokuapp.com';
 // // const baseUrl = url
 
-// const gameRoomsFetched = gameRooms => ({
-//   type: GAMEROOMS_FETCHED,
-//   gameRooms
-// })
-
-// const gameRoomFetched = gameRoom => ({
-//   type: GAMEROOM_FETCHED,
-//   gameRoom
-// })
 
 // const gameRoomCreateSuccess = gameRoom => ({
 //   type: GAMEROOM_CREATE_SUCCESS,
@@ -48,34 +38,13 @@ export const GAMEROOM_CREATE_SUCCESS = 'GAMEROOM_CREATE_SUCCESS'
 //     })
 // }
 
-// export const loadGameRooms = () => (dispatch, getState) => {
-//   // when the state already contains gameRooms, we don't fetch them again
-//   if (getState().gameRooms.length > 0) return
-
-//   // a GET /gameRooms request
-//   request(`${baseUrl}/gamerooms`)
-//     .then(response => {
-//       // dispatch an GAMEROOMS_FETCHED action that contains the gameRooms
-//       dispatch(gameRoomsFetched(response.body))
-//     })
-//     .catch(console.error)
-// }
-
-// export const loadGameRoom = (id) => (dispatch) => {
-//   request(`${baseUrl}/gamerooms/${id}`)
-//     .then(response => {
-//       dispatch(gameRoomFetched(response.body))
-//     })
-//     .catch(console.error)
-// }
-
 export const createGameRoom = (gameRoomInformation) => async dispatch => {
   console.log(`dispatched createGameRoom`, gameRoomInformation)
   try {
     const response = await request({
       method: "POST",
       url: `${baseUrl}/stream`,
-      headers: { authorization: `Bearer ${gameRoomInformation["userToken"]}` },
+      // headers: { authorization: `Bearer ${gameRoomInformation["userToken"]}` },
       data: gameRoomInformation
     });
     console.log("Success in create room", response);
@@ -83,16 +52,6 @@ export const createGameRoom = (gameRoomInformation) => async dispatch => {
     console.log("Error response to create room", error);
   }
 };
-
-// export const updateGameRoom = (id, data) => dispatch => {
-//   request
-//     .put(`${baseUrl}/gamerooms/${id}`)
-//     .send(data)
-//     .then(response => {
-//       dispatch(gameRoomUpdateSuccess(response.body))
-//     })
-//     .catch(console.error)
-// }
 
 // export const updateGameRoom = (gameRoomInformation, history) => dispath => {
 //   console.log("Dispatched updateGameRoom", gameRoomInformation);
@@ -127,5 +86,23 @@ export const updateGameRoom = (
     history.push(`/gamerooms/${gameRoomInformation.gameRoomId}`);
   } catch (error) {
     console.log("Error response to join game room", error);
+  }
+};
+
+export const gameRoomPlayerScore = (
+  gameRoomData
+) => async dispatch => {
+  console.log("Dispatch gameRoomInfo", gameRoomData);
+  try {
+    const response = await request({
+      method: "POST",
+      url: `${baseUrl}/scoreboard`,
+      // headers: { authorization: `Bearer ${gameRoomInfo["userToken"]}` },
+      data: gameRoomData,
+    });
+    console.log("Success in passing winning info", response);
+    console.log(`gameRoomId: `,gameRoomData.gameRoomId);
+  } catch (error) {
+    console.log("Error response for passing winning info", error);
   }
 };

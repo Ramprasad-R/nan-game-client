@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import shuffle from 'lodash.shuffle'
 import Card from './Card/Card'
 import GuessCount from './GuessCount/GuessCount'
+import { connect } from "react-redux";
+import {gameRoomPlayerScore} from '../../../actions/gameRooms';
+
 import './GameBoardContainer.css'
 // import HallOfFame, { FAKE_HOF } from './components/halloffame/HallOfFame'
 
@@ -88,10 +91,23 @@ class GameBoard extends Component {
           />
         ))}
         {/* {won && <HallOfFame entries={FAKE_HOF} />} */}
-        {won}
+        {won && this.props.gameRoomPlayerScore({
+          score: won,
+          gameRoomId: this.props.gameRoomData.gameRoomId,
+          userId: this.props.user.id,
+        })}
+        {/* {won} */}
       </div>
     )
   }
 }
 
-export default GameBoard
+const mapStateToProps = state => {
+  console.log("state of GR", state);
+  return {
+    rooms: state.gameRoom,
+    user: state.user.user
+  };
+};
+
+export default connect(mapStateToProps, { gameRoomPlayerScore })(GameBoard)

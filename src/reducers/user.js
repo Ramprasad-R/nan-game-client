@@ -1,6 +1,6 @@
 import { USER_CREATED, LOGIN_SUCCESS } from "../actions/users";
 
-const initialState = { userCreated: false, user: { email: null, token: null } };
+const initialState = { userCreated: false, user: { email: null, token: null, id: null } };
 
 export default (state = initialState, action = {}) => {
   switch (action.type) {

@@ -1,4 +1,5 @@
 import axios from "axios";
+// import user from "../reducers/user";
 
 export const USER_CREATED = "USER_CREATED";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
@@ -19,12 +20,13 @@ export function signUp(email, password) {
   };
 }
 
-function loginSuccess(email, token) {
+function loginSuccess(email, token, id) {
   return {
     type: LOGIN_SUCCESS,
     payload: {
       email: email,
-      token: token
+      token: token,
+      id: id
     }
   };
 }
@@ -35,7 +37,8 @@ export function login(email, password, history) {
       email,
       password
     });
-    dispatch(loginSuccess(response.data.email, response.data.token));
+    console.log(`check for the userId`,response)
+    dispatch(loginSuccess(response.data.email, response.data.token, response.data.id));
     history.push("/gamerooms");
   };
 }
