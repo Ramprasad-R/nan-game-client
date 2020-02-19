@@ -75,8 +75,6 @@ class App extends React.Component {
   };
 
   protectedRoute = (Component, routerProps) => {
-    console.log("I cam here ", this.props.token);
-
     const token = this.props.token;
     return token ? <Component {...routerProps} /> : <Redirect to="/login" />;
   };
