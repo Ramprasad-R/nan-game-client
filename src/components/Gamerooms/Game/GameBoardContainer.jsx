@@ -20,6 +20,16 @@ class GameBoard extends Component {
     matchedCardIndices: []
   }
 
+  // componentDidMount(){
+  //   console.log(`logging the pathname:`,this.props.history.location.pathname)
+  //   this.props.gameRoomPlayerScore({
+  //     score: this.state.guesses,
+  //     gameroomId: this.props.location.pathname.split("/").pop(),
+  //     userId: this.props.user.id,
+      
+  //   })
+  // }
+
   getFeedbackForCard(index) {
     const { currentPair, matchedCardIndices } = this.state
     const indexMatched = matchedCardIndices.includes(index)
@@ -77,7 +87,8 @@ class GameBoard extends Component {
 
   render() {
     const { cards, guesses, matchedCardIndices } = this.state
-    const won = matchedCardIndices.length === cards.length
+    const boardCompleted = matchedCardIndices.length === cards.length;
+    console.log(`logging the pathname:`,this.props.history.location.pathname)
     return (
       <div className="memory">
         <GuessCount guesses={guesses} />
@@ -91,11 +102,11 @@ class GameBoard extends Component {
           />
         ))}
         {/* {won && <HallOfFame entries={FAKE_HOF} />} */}
-        {won && this.props.gameRoomPlayerScore({
-          score: won,
-          gameRoomId: this.props.gameRoomData.gameRoomId,
+        {boardCompleted && this.props.gameRoomPlayerScore({
+          score: guesses,
+          gameroomId: this.props.location.pathname.split("/").pop(),
           userId: this.props.user.id,
-        })}
+          })}
         {/* {won} */}
       </div>
     )

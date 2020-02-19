@@ -101,7 +101,7 @@ export const gameRoomPlayerScore = (
       data: gameRoomData,
     });
     console.log("Success in passing winning info", response);
-    console.log(`gameRoomId: `,gameRoomData.gameRoomId);
+    console.log(`gameroomId: `,gameRoomData);
   } catch (error) {
     console.log("Error response for passing winning info", error);
   }
