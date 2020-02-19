@@ -6,8 +6,6 @@ import { updateGameRoom } from "../../actions/gameRooms";
 import { Link } from "react-router-dom";
 import CreateGameRoomContainer from "./CreateGameRoom/CreateGameRoomContainer";
 
-
-
 class GameRoomContainer extends Component {
   componentDidMount = () => {
     const isLoggedIn = this.props.user.token;
@@ -20,7 +18,7 @@ class GameRoomContainer extends Component {
     console.log("user token", this.props.user.token);
     const gameRoomInformation = {
       userToken: this.props.user.token,
-      gameRoomId: e.target.id,
+      gameRoomId: e.target.id
     };
     this.props.updateGameRoom(gameRoomInformation, this.props.history);
   };
@@ -42,15 +40,22 @@ class GameRoomContainer extends Component {
     if (!this.props.rooms.length) {
       return (
         <div>
-          <p>Loading...</p>
+          <CreateGameRoomContainer />
+          <Link to="/" style={{ color: "pink" }}>
+            <p>Back to Home</p>
+          </Link>
         </div>
       );
     }
-    return <div>
-            <Link to="/" style={{color:"pink"}}><p>Back to Home</p></Link>
-            <CreateGameRoomContainer/>
-            <div>{this.renderGamerooms(this.props.rooms, GameRoom)}</div>
-          </div>;
+    return (
+      <div>
+        <CreateGameRoomContainer />
+        <div>{this.renderGamerooms(this.props.rooms, GameRoom)}</div>
+        <Link to="/" style={{ color: "pink" }}>
+          <p>Back to Home</p>
+        </Link>
+      </div>
+    );
   }
 }
 
