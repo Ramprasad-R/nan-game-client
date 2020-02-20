@@ -116,7 +116,7 @@ class GameBoard extends Component {
       currentPair: newPair,
       guesses: newGuesses
     });
-    if (!this.timerBoardCompleted) {
+    if (this.timerBoardCompleted) {
       this.setState({
         isActive: !this.state.isActive
       });
