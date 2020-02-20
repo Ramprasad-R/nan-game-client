@@ -7,6 +7,7 @@ import { gameRoomPlayerScore } from "../../../actions/gameRooms";
 import { Link } from "react-router-dom";
 import "./GameBoardContainer.css";
 import ScoreBoard from "../../ScoreBoard";
+import Timer from './Timer/Timer';
 // import HallOfFame, { FAKE_HOF } from './components/halloffame/HallOfFame'
 
 const SIDE = 2;
@@ -129,6 +130,7 @@ class GameBoard extends Component {
     console.log(this.state, this.props)
     return (
       <div className="memory">
+        <Timer/>
         <GuessCount guesses={guesses} />
         {cards.map((card, index) => (
           <Card
