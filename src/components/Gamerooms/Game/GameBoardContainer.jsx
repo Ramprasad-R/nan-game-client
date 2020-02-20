@@ -13,6 +13,7 @@ import Timer from './Timer/Timer';
 const SIDE = 2;
 const SYMBOLS = "🎃🎂🎅🐰🎥🍂👨💪🎓👩🎊🏊👑☪🌱☘☀🏈💘⚽";
 const VISUAL_PAUSE_MSECS = 750;
+
 class GameBoard extends Component {
   state = {
     cards: this.generateCards(),
@@ -20,6 +21,7 @@ class GameBoard extends Component {
     guesses: 0,
     matchedCardIndices: []
   };
+  timerBoardCompleted = null;
 
   currentGameRoomId = this.props.location.pathname.split("/").pop();
   // componentDidMount(){
@@ -98,6 +100,7 @@ class GameBoard extends Component {
         matchedCardIndices: [...matchedCardIndices, ...newPair]
       }, () => {
         const boardCompleted = this.state.matchedCardIndices.length === this.state.cards.length;
+        this.timerBoardCompleted = boardCompleted;
         console.log('Board completed', boardCompleted)
         if(boardCompleted){
           this.props.gameRoomPlayerScore({
@@ -130,7 +133,7 @@ class GameBoard extends Component {
     console.log(this.state, this.props)
     return (
       <div className="memory">
-        <Timer/>
+        <Timer boardcompleted = {this.timerBoardCompleted} guesses ={this.state.guesses}/>
         <GuessCount guesses={guesses} />
         {cards.map((card, index) => (
           <Card
