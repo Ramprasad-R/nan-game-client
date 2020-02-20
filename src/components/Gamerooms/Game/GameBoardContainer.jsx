@@ -7,7 +7,7 @@ import { gameRoomPlayerScore } from "../../../actions/gameRooms";
 import { Link } from "react-router-dom";
 import "./GameBoardContainer.css";
 import ScoreBoard from "../../ScoreBoard";
-import Timer from './Timer/Timer';
+import Timer from "./Timer/Timer";
 // import HallOfFame, { FAKE_HOF } from './components/halloffame/HallOfFame'
 
 const SIDE = 2;
@@ -19,9 +19,11 @@ class GameBoard extends Component {
     cards: this.generateCards(),
     currentPair: [],
     guesses: 0,
-    matchedCardIndices: []
+    matchedCardIndices: [],
+    seconds: 0,
+    isActive: false
   };
-  timerBoardCompleted = null;
+  timerBoardCompleted = false;
 
   currentGameRoomId = this.props.location.pathname.split("/").pop();
   // componentDidMount(){
@@ -34,17 +36,31 @@ class GameBoard extends Component {
   //   })
   // }
 
+  // componentDidUpdate = () => {
+  // const { cards, guesses, matchedCardIndices } = this.state;
+  // const boardCompleted = matchedCardIndices.length === cards.length;
+  // console.log('Board completed')
+  // boardCompleted &&
+  //       this.props.gameRoomPlayerScore({
+  //         score: guesses,
+  //         gameroomId: this.currentGameRoomId,
+  //         userId: this.props.user.id
+  //       })
+  // };
+
   componentDidUpdate = () => {
-    // const { cards, guesses, matchedCardIndices } = this.state;
-    // const boardCompleted = matchedCardIndices.length === cards.length;
-    // console.log('Board completed')
-    // boardCompleted &&
-    //       this.props.gameRoomPlayerScore({
-    //         score: guesses,
-    //         gameroomId: this.currentGameRoomId,
-    //         userId: this.props.user.id
-    //       })
-  }
+    let interval = null;
+    if (this.state.isActive) {
+      interval = setTimeout(() => {
+        this.setState({
+          seconds: this.state.seconds + 1
+        });
+      }, 1000);
+    } else if (!this.state.isActive && this.state.seconds !== 0) {
+      clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+  };
 
   getFeedbackForCard(index) {
     const { currentPair, matchedCardIndices } = this.state;
@@ -84,33 +100,47 @@ class GameBoard extends Component {
       this.setState({ currentPair: [index] });
       return;
     }
-
+    this.setState({
+      isActive: !this.state.isActive
+    });
     this.handleNewPairClosedBy(index);
   };
 
-  handleNewPairClosedBy(index) {
+  handleNewPairClosedBy = index => {
     const { cards, currentPair, guesses, matchedCardIndices } = this.state;
 
     const newPair = [currentPair[0], index];
     const newGuesses = guesses + 1;
     const matched = cards[newPair[0]] === cards[newPair[1]];
-    this.setState({ currentPair: newPair, guesses: newGuesses });
-    if (matched) {
+    this.setState({
+      currentPair: newPair,
+      guesses: newGuesses
+    });
+    if (!this.timerBoardCompleted) {
       this.setState({
-        matchedCardIndices: [...matchedCardIndices, ...newPair]
-      }, () => {
-        const boardCompleted = this.state.matchedCardIndices.length === this.state.cards.length;
-        this.timerBoardCompleted = boardCompleted;
-        console.log('Board completed', boardCompleted)
-        if(boardCompleted){
-          this.props.gameRoomPlayerScore({
-            score: guesses,
-            gameroomId: this.currentGameRoomId,
-            userId: this.props.user.id
-          })
-        }
+        isActive: !this.state.isActive
       });
+    }
 
+    if (matched) {
+      this.setState(
+        {
+          matchedCardIndices: [...matchedCardIndices, ...newPair]
+        },
+        () => {
+          const boardCompleted =
+            this.state.matchedCardIndices.length === this.state.cards.length;
+          this.timerBoardCompleted = boardCompleted;
+          console.log("Board completed", boardCompleted);
+          if (boardCompleted) {
+            this.props.gameRoomPlayerScore({
+              score: guesses,
+              gameroomId: this.currentGameRoomId,
+              userId: this.props.user.id
+            });
+          }
+        }
+      );
 
       // const boardCompleted = matchedCardIndices.length === cards.length;
       // console.log('Board completed')
@@ -121,19 +151,21 @@ class GameBoard extends Component {
       //         userId: this.props.user.id
       //       })
       //     }
-
     }
     setTimeout(() => this.setState({ currentPair: [] }), VISUAL_PAUSE_MSECS);
-  }
+  };
 
   render() {
-    const { cards, guesses,  } = this.state; //matchedCardIndices
+    const { cards, guesses } = this.state; //matchedCardIndices
     // const boardCompleted = matchedCardIndices.length === cards.length;
     console.log(`logging the pathname:`, this.props.history.location.pathname);
-    console.log(this.state, this.props)
+    console.log(this.state, this.props);
     return (
       <div className="memory">
-        <Timer boardcompleted = {this.timerBoardCompleted} guesses ={this.state.guesses}/>
+        <Timer
+          boardcompleted={this.timerBoardCompleted}
+          seconds={this.state.seconds}
+        />
         <GuessCount guesses={guesses} />
         {cards.map((card, index) => (
           <Card
