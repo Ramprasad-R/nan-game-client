@@ -20,11 +20,11 @@ class GameBoard extends Component {
     currentPair: [],
     guesses: 0,
     matchedCardIndices: [],
-    seconds: 0,
+    score: 1000,
     isActive: false
   };
   timerBoardCompleted = false;
-
+  guesses1 = 0;
   currentGameRoomId = this.props.location.pathname.split("/").pop();
   // componentDidMount(){
   //   console.log(`logging the pathname:`,this.props.history.location.pathname)
@@ -53,10 +53,10 @@ class GameBoard extends Component {
     if (this.state.isActive) {
       interval = setTimeout(() => {
         this.setState({
-          seconds: this.state.seconds + 1
+          score: this.state.score - 10 - this.guesses1
         });
-      }, 1000);
-    } else if (!this.state.isActive && this.state.seconds !== 0) {
+      }, 5000);
+    } else if (!this.state.isActive && this.state.score !== 0) {
       clearInterval(interval);
     }
     return () => clearInterval(interval);
@@ -91,6 +91,9 @@ class GameBoard extends Component {
   // Arrow fx for binding
   handleCardClick = index => {
     const { currentPair } = this.state;
+    this.setState({
+      isActive: true
+    });
 
     if (currentPair.length === 2) {
       return;
@@ -100,9 +103,6 @@ class GameBoard extends Component {
       this.setState({ currentPair: [index] });
       return;
     }
-    this.setState({
-      isActive: !this.state.isActive
-    });
     this.handleNewPairClosedBy(index);
   };
 
@@ -111,12 +111,13 @@ class GameBoard extends Component {
 
     const newPair = [currentPair[0], index];
     const newGuesses = guesses + 1;
+    this.guesses1 = newGuesses;
     const matched = cards[newPair[0]] === cards[newPair[1]];
     this.setState({
       currentPair: newPair,
       guesses: newGuesses
     });
-    if (this.timerBoardCompleted) {
+    if (this.timerBoardCompleted && this.state.score <= 0) {
       this.setState({
         isActive: !this.state.isActive
       });
@@ -164,7 +165,7 @@ class GameBoard extends Component {
       <div className="memory">
         <Timer
           boardcompleted={this.timerBoardCompleted}
-          seconds={this.state.seconds}
+          score={this.state.score}
         />
         <GuessCount guesses={guesses} />
         {cards.map((card, index) => (
