@@ -5,7 +5,7 @@ const Timer = props => {
   console.log(props);
   // const [seconds, setSeconds] = useState(0);
   // const [isActive, setIsActive] = useState(false);
-  const seconds = props.seconds;
+  const score = props.score;
   // const theBoardCompleted = props.boardCompleted;
 
   // function toggle() {
@@ -34,7 +34,7 @@ const Timer = props => {
   // }, [isActive, seconds]);
   return (
     <div className="app">
-      <div className="time">{seconds}s</div>
+      <div className="time">Score: {score}</div>
       <div className="row">
         {/* <button className={`button button-primary button-primary-${isActive ? 'active' : 'inactive'}`} onClick={toggle}>
           {isActive ? 'Pause' : 'Start'}
