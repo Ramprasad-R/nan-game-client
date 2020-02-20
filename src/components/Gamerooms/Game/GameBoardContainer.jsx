@@ -31,6 +31,18 @@ class GameBoard extends Component {
   //   })
   // }
 
+  componentDidUpdate = () => {
+    // const { cards, guesses, matchedCardIndices } = this.state;
+    // const boardCompleted = matchedCardIndices.length === cards.length;
+    // console.log('Board completed')
+    // boardCompleted &&
+    //       this.props.gameRoomPlayerScore({
+    //         score: guesses,
+    //         gameroomId: this.currentGameRoomId,
+    //         userId: this.props.user.id
+    //       })
+  }
+
   getFeedbackForCard(index) {
     const { currentPair, matchedCardIndices } = this.state;
     const indexMatched = matchedCardIndices.includes(index);
@@ -83,15 +95,38 @@ class GameBoard extends Component {
     if (matched) {
       this.setState({
         matchedCardIndices: [...matchedCardIndices, ...newPair]
+      }, () => {
+        const boardCompleted = this.state.matchedCardIndices.length === this.state.cards.length;
+        console.log('Board completed', boardCompleted)
+        if(boardCompleted){
+          this.props.gameRoomPlayerScore({
+            score: guesses,
+            gameroomId: this.currentGameRoomId,
+            userId: this.props.user.id
+          })
+        }
       });
+
+
+      // const boardCompleted = matchedCardIndices.length === cards.length;
+      // console.log('Board completed')
+      // if(boardCompleted){
+      //       this.props.gameRoomPlayerScore({
+      //         score: guesses,
+      //         gameroomId: this.currentGameRoomId,
+      //         userId: this.props.user.id
+      //       })
+      //     }
+
     }
     setTimeout(() => this.setState({ currentPair: [] }), VISUAL_PAUSE_MSECS);
   }
 
   render() {
-    const { cards, guesses, matchedCardIndices } = this.state;
-    const boardCompleted = matchedCardIndices.length === cards.length;
+    const { cards, guesses,  } = this.state; //matchedCardIndices
+    // const boardCompleted = matchedCardIndices.length === cards.length;
     console.log(`logging the pathname:`, this.props.history.location.pathname);
+    console.log(this.state, this.props)
     return (
       <div className="memory">
         <GuessCount guesses={guesses} />
@@ -105,12 +140,12 @@ class GameBoard extends Component {
           />
         ))}
         {/* {won && <HallOfFame entries={FAKE_HOF} />} */}
-        {boardCompleted &&
+        {/* {boardCompleted &&
           this.props.gameRoomPlayerScore({
             score: guesses,
-            gameroomId: this.currentGameRoomId,
+            gameroomId: this.currentGameRoomId,             //this snippet is moved up to handleNewPairClosedBy fx(line88) where called as callback!
             userId: this.props.user.id
-          })}
+          })} */}
         {/* {won} */}
         <ScoreBoard gameroomId={this.currentGameRoomId} />
         <Link to="/gamerooms" style={{ color: "pink" }}>
