@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import sortBy from "lodash.sortby";
 function ScoreBoard(props) {
-  const state = useSelector(state => state.scoreBoard);
+  const state = useSelector(state => state.scoreBoard); //Simillar to Map state to props using react hooks
   const currentGameRoomScore = state.filter(
     score => parseInt(score.gameroomId) === parseInt(props.gameroomId)
   );
