@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import sortBy from "lodash.sortby";
+import "./ScoreBoard.css"
 
 function ScoreBoard(props) {
   const state = useSelector(state => state.scoreBoard); //Similar to Map state to props using react hooks !!!
@@ -11,7 +12,7 @@ function ScoreBoard(props) {
     .reverse()
     .slice(0, 5);
   return (
-    <div>
+    <div className="score-box">
       <h3>Gameroom Hall Of Fame</h3>
       {topFiveScore.map((score, index) => (
         <p key={index}>

@@ -1,4 +1,5 @@
 import React from "react";
+import "./Timer.css";
 // import { useState, useEffect } from "react";
 // import GuessCount from '../GuessCount/GuessCount';
 
@@ -35,10 +36,10 @@ const Timer = props => {
   // }, [isActive, seconds]);
   return (
     <div className="app">
-      <div className="time">
+      <div className="score-box">
         <p>Score: {score} </p>
         <p>Time: {props.timer}</p>
-        <p>Gusses: {props.guesses}</p>
+        <p>Guesses: {props.guesses}</p>
       </div>
       <div className="row">
         {/* <button className={`button button-primary button-primary-${isActive ? 'active' : 'inactive'}`} onClick={toggle}>

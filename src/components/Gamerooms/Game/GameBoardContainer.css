@@ -6,3 +6,31 @@
   margin: auto;
   user-select: none;
 }
+.button {
+  text-align: center;
+  background-color: #282c34;
+  /* min-height: 100vh; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  font-size: calc(10px + 2vmin);
+  color: lightseagreen;
+}
+.score-board {
+  text-align: center;
+  padding: 25px;
+}
+.player {
+  display: inline-block;
+  padding: 15px;
+}
+.player h4 {
+  font-weight: bold;
+}
+.score-box {
+  border: 3px solid black;
+  padding: 30px;
+  color: #2CB3C9;
+}
