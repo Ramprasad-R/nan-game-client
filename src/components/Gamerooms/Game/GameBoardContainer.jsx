@@ -43,6 +43,9 @@ class GameBoard extends Component {
       this.timerBoardCompleted = true;
       //window.location.reload();
     }
+    if(this.state.score >= 200){
+      console.log('warning low score')
+    }
     if (!nextState.gameStarted) {
       console.log("GAME FINISSHED!!");
       clearInterval(this.interval);
