@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import shuffle from "lodash.shuffle";
 import Card from "./Card/Card";
-import GuessCount from "./GuessCount/GuessCount";
+// import GuessCount from "./GuessCount/GuessCount";
 import { connect } from "react-redux";
 import { gameRoomPlayerScore } from "../../../actions/gameRooms";
 import { Link } from "react-router-dom";
 import "./GameBoardContainer.css";
 import ScoreBoard from "../../ScoreBoard";
 import Timer from "./Timer/Timer";
-import { updateGameRoom } from "../../../actions/gameRooms";
+// import { updateGameRoom } from "../../../actions/gameRooms";
 
 // import HallOfFame, { FAKE_HOF } from './components/halloffame/HallOfFame'
 
@@ -146,22 +146,7 @@ class GameBoard extends Component {
 
   handleReset = e => {
     console.log("Reset is clicked", e.target.id);
-    // console.log("user token", this.props.user.token);
-    const gameRoomInformation = {
-      // userToken: this.props.user.token,
-      gameRoomId: e.target.id
-    };
-    updateGameRoom(gameRoomInformation, this.props.history);
-    this.setState({
-      cards: this.generateCards(),
-      currentPair: [],
-      guesses: 0,
-      matchedCardIndices: [],
-      score: 1000,
-      isActive: false,
-      gameStarted: false,
-      timer: 0
-    });
+    window.location.reload();
   };
 
   render() {
