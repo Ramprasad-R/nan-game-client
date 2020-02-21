@@ -16,7 +16,6 @@ const SIDE = 2;
 const SYMBOLS = "🎃🎂🎅🐰🎥🍂👨💪🎓👩🎊🏊👑☪🌱☘☀🏈💘⚽";
 const VISUAL_PAUSE_MSECS = 750;
 
-
 class GameBoard extends Component {
   state = {
     cards: this.generateCards(),
@@ -144,8 +143,8 @@ class GameBoard extends Component {
     }
     setTimeout(() => this.setState({ currentPair: [] }), VISUAL_PAUSE_MSECS);
   };
-  
-  handleReset = (e) => {
+
+  handleReset = e => {
     console.log("Reset is clicked", e.target.id);
     // console.log("user token", this.props.user.token);
     const gameRoomInformation = {
@@ -159,7 +158,9 @@ class GameBoard extends Component {
       guesses: 0,
       matchedCardIndices: [],
       score: 1000,
-      isActive: false
+      isActive: false,
+      gameStarted: false,
+      timer: 0
     });
   };
 
@@ -191,7 +192,9 @@ class GameBoard extends Component {
           <p>Back to Gameroom</p>
         </Link>
         <div>
-          <button id={this.props.id} onClick={this.handleReset}>Start new Game!</button>
+          <button id={this.props.id} onClick={this.handleReset}>
+            Start new Game!
+          </button>
         </div>
       </div>
     );
