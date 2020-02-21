@@ -1,15 +1,13 @@
 import request from "axios";
 
-const baseUrl = "http://localhost:4000";
+const baseUrl = process.env.REACT_APP_BACKEND_URL;
 
-
-export const GAMEROOM_CREATE_SUCCESS = 'GAMEROOM_CREATE_SUCCESS'
+export const GAMEROOM_CREATE_SUCCESS = "GAMEROOM_CREATE_SUCCESS";
 // export const GAMEROOM_DELETE_SUCCESS = 'GAMEROOM_DELETE_SUCCESS'
 // export const GAMEROOM_UPDATE_SUCCESS = 'GAMEROOM_UPDATE_SUCCESS'
 
 // // const url = process.env.DATABASE_URL || 'https://damp-beach-23036.herokuapp.com';
 // // const baseUrl = url
-
 
 // const gameRoomCreateSuccess = gameRoom => ({
 //   type: GAMEROOM_CREATE_SUCCESS,
@@ -38,8 +36,8 @@ export const GAMEROOM_CREATE_SUCCESS = 'GAMEROOM_CREATE_SUCCESS'
 //     })
 // }
 
-export const createGameRoom = (gameRoomInformation) => async dispatch => {
-  console.log(`dispatched createGameRoom`, gameRoomInformation)
+export const createGameRoom = gameRoomInformation => async dispatch => {
+  console.log(`dispatched createGameRoom`, gameRoomInformation);
   try {
     const response = await request({
       method: "POST",
@@ -82,26 +80,27 @@ export const updateGameRoom = (
       data: gameRoomInformation
     });
     console.log("Success in Join", response);
-    console.log(`gameRoomId needed for sending user to the correct room: `,gameRoomInformation.gameRoomId);
+    console.log(
+      `gameRoomId needed for sending user to the correct room: `,
+      gameRoomInformation.gameRoomId
+    );
     history.push(`/gamerooms/${gameRoomInformation.gameRoomId}`);
   } catch (error) {
     console.log("Error response to join game room", error);
   }
 };
 
-export const gameRoomPlayerScore = (
-  gameRoomData
-) => async dispatch => {
+export const gameRoomPlayerScore = gameRoomData => async dispatch => {
   console.log("Dispatch gameRoomInfo", gameRoomData);
   try {
     const response = await request({
       method: "POST",
       url: `${baseUrl}/scoreboard`,
       // headers: { authorization: `Bearer ${gameRoomInfo["userToken"]}` },
-      data: gameRoomData,
+      data: gameRoomData
     });
     console.log("Success in passing winning info", response);
-    console.log(`gameroomId: `,gameRoomData);
+    console.log(`gameroomId: `, gameRoomData);
   } catch (error) {
     console.log("Error response for passing winning info", error);
   }
