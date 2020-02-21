@@ -12,7 +12,7 @@ import Timer from "./Timer/Timer";
 
 // import HallOfFame, { FAKE_HOF } from './components/halloffame/HallOfFame'
 
-const SIDE = 2;
+const SIDE = 6;
 const SYMBOLS = "🎃🎂🎅🐰🎥🍂👨💪🎓👩🎊🏊👑☪🌱☘☀🏈💘⚽";
 const VISUAL_PAUSE_MSECS = 750;
 
