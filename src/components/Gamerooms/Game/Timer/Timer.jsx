@@ -35,7 +35,11 @@ const Timer = props => {
   // }, [isActive, seconds]);
   return (
     <div className="app">
-      <div className="time">Score: {score}</div>
+      <div className="time">
+        <p>Score: {score} </p>
+        <p>Time: {props.timer}</p>
+        <p>Gusses: {props.guesses}</p>
+      </div>
       <div className="row">
         {/* <button className={`button button-primary button-primary-${isActive ? 'active' : 'inactive'}`} onClick={toggle}>
           {isActive ? 'Pause' : 'Start'}

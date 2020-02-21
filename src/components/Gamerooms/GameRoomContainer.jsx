@@ -60,7 +60,7 @@ class GameRoomContainer extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log("state of GR", state);
+  // console.log("state of GR", state);
   return {
     rooms: state.gameRoom,
     user: state.user.user
