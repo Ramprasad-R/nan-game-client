@@ -8,11 +8,14 @@ import { Link } from "react-router-dom";
 import "./GameBoardContainer.css";
 import ScoreBoard from "../../ScoreBoard";
 import Timer from "./Timer/Timer";
+import { updateGameRoom } from "../../../actions/gameRooms";
+
 // import HallOfFame, { FAKE_HOF } from './components/halloffame/HallOfFame'
 
 const SIDE = 2;
 const SYMBOLS = "🎃🎂🎅🐰🎥🍂👨💪🎓👩🎊🏊👑☪🌱☘☀🏈💘⚽";
 const VISUAL_PAUSE_MSECS = 750;
+
 
 class GameBoard extends Component {
   state = {
@@ -155,6 +158,24 @@ class GameBoard extends Component {
     }
     setTimeout(() => this.setState({ currentPair: [] }), VISUAL_PAUSE_MSECS);
   };
+  
+  handleReset = (e) => {
+    console.log("Reset is clicked", e.target.id);
+    // console.log("user token", this.props.user.token);
+    const gameRoomInformation = {
+      // userToken: this.props.user.token,
+      gameRoomId: e.target.id
+    };
+    updateGameRoom(gameRoomInformation, this.props.history);
+    this.setState({
+      cards: this.generateCards(),
+      currentPair: [],
+      guesses: 0,
+      matchedCardIndices: [],
+      score: 1000,
+      isActive: false
+    });
+  };
 
   render() {
     const { cards, guesses } = this.state; //matchedCardIndices
@@ -189,6 +210,9 @@ class GameBoard extends Component {
         <Link to="/gamerooms" style={{ color: "pink" }}>
           <p>Back to Gameroom</p>
         </Link>
+        <div>
+          <button id={this.props.id} onClick={this.handleReset}>Start new Game!</button>
+        </div>
       </div>
     );
   }
