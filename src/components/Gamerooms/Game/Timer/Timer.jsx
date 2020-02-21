@@ -35,7 +35,7 @@ const Timer = props => {
   //   return () => clearInterval(interval);
   // }, [isActive, seconds]);
   return (
-    <div className="app">
+    <div>
       <div className="score-box">
         <p>Score: {score} </p>
         <p>Time: {props.timer}</p>

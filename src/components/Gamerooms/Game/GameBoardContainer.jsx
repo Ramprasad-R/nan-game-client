@@ -12,7 +12,7 @@ import Timer from "./Timer/Timer";
 
 // import HallOfFame, { FAKE_HOF } from './components/halloffame/HallOfFame'
 
-const SIDE = 6;
+const SIDE = 2;
 const SYMBOLS = "🎃🎂🎅🐰🎥🍂👨💪🎓👩🎊🏊👑☪🌱☘☀🏈💘⚽";
 const VISUAL_PAUSE_MSECS = 750;
 
@@ -22,7 +22,7 @@ class GameBoard extends Component {
     currentPair: [],
     guesses: 0,
     matchedCardIndices: [],
-    score: 30,
+    score: 5000,
     isActive: false,
     gameStarted: false,
     timer: 0
