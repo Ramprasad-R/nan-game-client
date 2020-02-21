@@ -1,14 +1,24 @@
-.time {
+/* .time {
   color: gray;
-  font-size: 18px;
+  font-size: 8px;
   font-family: helvetica;
   padding-left: 10px;
   padding-right: 10px;
   border: 1px solid #f0eeee;
   border-radius: 3px;
-  width: 100px;
+  width: 50px;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+} */
+.score-box {
+  box-sizing: content-box;
+  display: flex;
+  flex-direction: column;
+  /* font-size: 16px; */
+  /* width: 50%; */
+  border: solid darkred 7px;
+  padding: 30px;
+  color: #2CB3C9;
 }

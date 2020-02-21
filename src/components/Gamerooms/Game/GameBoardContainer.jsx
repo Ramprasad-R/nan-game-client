@@ -12,7 +12,7 @@ import Timer from "./Timer/Timer";
 
 // import HallOfFame, { FAKE_HOF } from './components/halloffame/HallOfFame'
 
-const SIDE = 2;
+const SIDE = 6;
 const SYMBOLS = "🎃🎂🎅🐰🎥🍂👨💪🎓👩🎊🏊👑☪🌱☘☀🏈💘⚽";
 const VISUAL_PAUSE_MSECS = 750;
 
@@ -22,7 +22,7 @@ class GameBoard extends Component {
     currentPair: [],
     guesses: 0,
     matchedCardIndices: [],
-    score: 30,
+    score: 20000,
     isActive: false,
     gameStarted: false,
     timer: 0
@@ -42,6 +42,9 @@ class GameBoard extends Component {
       clearInterval(this.interval);
       this.timerBoardCompleted = true;
       //window.location.reload();
+    }
+    if(this.state.score <= 200){
+      console.log('warning low score')
     }
     if (!nextState.gameStarted) {
       console.log("GAME FINISSHED!!");
@@ -165,13 +168,18 @@ class GameBoard extends Component {
     console.log(`logging the pathname:`, this.props.history.location.pathname);
     console.log(this.state, this.props);
     return (
-      <div className="memory">
+      <div>
+        <ScoreBoard gameroomId={this.currentGameRoomId} />
+        <h1>Your Game is ready</h1>
+        <h2>Guess all the tiles as fast as you can</h2>
+        <h3>Speed and accuracy matter to win</h3>
         <Timer
           boardcompleted={this.timerBoardCompleted}
           score={this.state.score}
           timer={this.state.timer}
           guesses={guesses}
         />
+        <div className="memory">
         {/* <GuessCount guesses={guesses} /> */}
         {cards.map((card, index) => (
           <Card
@@ -182,17 +190,18 @@ class GameBoard extends Component {
             onClick={this.handleCardClick}
           />
         ))}
-
-        <ScoreBoard gameroomId={this.currentGameRoomId} />
+        
+      </div>
         <Link to="/gamerooms" style={{ color: "pink" }}>
           <p>Back to Gameroom</p>
-        </Link>
+        </Link> 
         <div>
-          <button id={this.props.id} onClick={this.handleReset}>
+          <button id={this.props.id} onClick={this.handleReset} className="button">
             Start new Game!
           </button>
         </div>
       </div>
+      
     );
   }
 }
