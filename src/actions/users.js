@@ -9,10 +9,13 @@ function signUpSuccess() {
 
 export function signUp(email, password) {
   return async function(dispatch, getState) {
-    const response = await axios.post("http://localhost:4000/user", {
-      email: email,
-      password: password
-    });
+    const response = await axios.post(
+      `${process.env.REACT_APP_BACKEND_URL}/user`,
+      {
+        email: email,
+        password: password
+      }
+    );
 
     if (response.status === 201) {
       dispatch(signUpSuccess());
@@ -33,12 +36,17 @@ function loginSuccess(email, token, id) {
 
 export function login(email, password, history) {
   return async function(dispatch, getState) {
-    const response = await axios.post("http://localhost:4000/login", {
-      email,
-      password
-    });
-    console.log(`check for the userId`,response)
-    dispatch(loginSuccess(response.data.email, response.data.token, response.data.id));
+    const response = await axios.post(
+      `${process.env.REACT_APP_BACKEND_URL}/login`,
+      {
+        email,
+        password
+      }
+    );
+    console.log(`check for the userId`, response);
+    dispatch(
+      loginSuccess(response.data.email, response.data.token, response.data.id)
+    );
     history.push("/gamerooms");
   };
 }

@@ -22,11 +22,11 @@ class GameRoomContainer extends Component {
     };
     this.props.updateGameRoom(gameRoomInformation, this.props.history);
   };
-  renderGamerooms = (rooms, RoomComponent) => {
+  renderGamerooms = (rooms, RoomComponent) => {  //Component made within this component!
     return rooms.map(room => {
       console.log("game room container", room);
       return (
-        <RoomComponent
+        <RoomComponent              //Component made within this component!
           key={room.gameRoomId}
           id={room.gameRoomId}
           name={room.gameRoomName}
@@ -60,7 +60,7 @@ class GameRoomContainer extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log("state of GR", state);
+  // console.log("state of GR", state);
   return {
     rooms: state.gameRoom,
     user: state.user.user

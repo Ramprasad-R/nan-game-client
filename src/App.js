@@ -11,15 +11,18 @@ import { connect } from "react-redux";
 import { gameRoomsFetched, gameRoomFetched } from "./actions/stream";
 import { allScoreFetched, oneScoreFetched } from "./actions/scoreBoardStream";
 import GameBoard from "./components/Gamerooms/Game/GameBoardContainer";
+console.log("checking .env", process.env.REACT_APP_BACKEND_URL);
 
 class App extends React.Component {
   // state = {
   //   gamerooms: [],
   //   gameroom: "first"
   // };
-  stream = new EventSource("http://localhost:4000/stream");
+  stream = new EventSource(`${process.env.REACT_APP_BACKEND_URL}/stream`);
   // stream = new EventSource(`${baseUrl}/stream`)
-  scoreBoardStream = new EventSource("http://localhost:4000/scoreboard");
+  scoreBoardStream = new EventSource(
+    `${process.env.REACT_APP_BACKEND_URL}/scoreboard`
+  );
   componentDidMount = () => {
     this.stream.onmessage = event => {
       const { data } = event;
