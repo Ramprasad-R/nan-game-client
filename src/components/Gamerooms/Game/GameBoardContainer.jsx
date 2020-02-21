@@ -22,7 +22,7 @@ class GameBoard extends Component {
     currentPair: [],
     guesses: 0,
     matchedCardIndices: [],
-    score: 1000,
+    score: 30,
     isActive: false,
     gameStarted: false,
     timer: 0
@@ -32,13 +32,17 @@ class GameBoard extends Component {
   currentGameRoomId = this.props.location.pathname.split("/").pop();
 
   interval = null;
-
   shouldComponentUpdate = (nextProps, nextState) => {
     console.log(
       "checking timer",
       nextState.gameStarted,
       this.state.gameStarted
     );
+    if (this.state.score <= 0) {
+      clearInterval(this.interval);
+      this.timerBoardCompleted = true;
+      //window.location.reload();
+    }
     if (!nextState.gameStarted) {
       console.log("GAME FINISSHED!!");
       clearInterval(this.interval);
@@ -48,7 +52,10 @@ class GameBoard extends Component {
         () =>
           this.setState({
             timer: this.state.timer + 1,
-            score: this.state.score - this.state.timer - this.guessesCount
+            score:
+              this.state.score - this.state.timer - this.guessesCount <= 0
+                ? 0
+                : this.state.score - this.state.timer - this.guessesCount
           }),
         1000
       );
@@ -123,11 +130,15 @@ class GameBoard extends Component {
           matchedCardIndices: [...matchedCardIndices, ...newPair]
         },
         () => {
+          // let boardCompleted = false;
+          // if (this.timerBoardCompleted) {
+          //   console.log("I reached here to check board completed");
+
+          //   boardCompleted = true;
+          // }
           const boardCompleted =
             this.state.matchedCardIndices.length === this.state.cards.length;
-          this.timerBoardCompleted = boardCompleted;
-          console.log("Board completed", boardCompleted);
-          if (boardCompleted) {
+          if (boardCompleted || this.timerBoardCompleted) {
             this.setState({
               isActive: !this.state.isActive,
               gameStarted: !this.state.gameStarted
