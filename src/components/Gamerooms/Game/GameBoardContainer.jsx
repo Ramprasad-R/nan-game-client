@@ -22,7 +22,7 @@ class GameBoard extends Component {
     currentPair: [],
     guesses: 0,
     matchedCardIndices: [],
-    score: 10000,
+    score: 20000,
     isActive: false,
     gameStarted: false,
     timer: 0
@@ -170,7 +170,7 @@ class GameBoard extends Component {
     return (
       <div>
         <ScoreBoard gameroomId={this.currentGameRoomId} />
-        <h1>Your Game is waiting</h1>
+        <h1>Your Game is ready</h1>
         <h2>Guess all the tiles as fast as you can</h2>
         <h3>Speed and accuracy matter to win</h3>
         <Timer
