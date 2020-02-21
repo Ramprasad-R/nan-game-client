@@ -13,7 +13,7 @@ function ScoreBoard(props) {
     .slice(0, 5);
   return (
     <div className="score-box">
-      <h3>Gameroom Hall Of Fame</h3>
+      <h3>Hall Of Fame</h3>
       {topFiveScore.map((score, index) => (
         <p key={index}>
           {score.user}
