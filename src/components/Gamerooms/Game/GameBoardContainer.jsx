@@ -22,7 +22,7 @@ class GameBoard extends Component {
     currentPair: [],
     guesses: 0,
     matchedCardIndices: [],
-    score: 5000,
+    score: 10000,
     isActive: false,
     gameStarted: false,
     timer: 0
