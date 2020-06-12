@@ -8,6 +8,6 @@ User can signup and login to the app can join any game room or create their own 
 
 Please feel free to review and share you comments. 
 
-[Thierry](https://www.linkedin.com/in/thierrydekelver/)
-[Laphatrada](https://linkedin.com/in/laphatradaphusri/)
-[Ramprasad](https://www.linkedin.com/in/ramprasad-rengaramanujam/)
+- **[Thierry](https://www.linkedin.com/in/thierrydekelver/)**
+- **[Laphatrada](https://linkedin.com/in/laphatradaphusri/)**
+- **[Ramprasad](https://www.linkedin.com/in/ramprasad-rengaramanujam/)**
